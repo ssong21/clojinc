@@ -282,6 +282,10 @@ my-favorite-number
 ;;   (or look some up if you don't remember any!).
 
 ;; @@
+(def diameter 102.3)
+
+(let [radius (/ diameter 2)]
+  (* radius radius Math/PI))
 
 ;; @@
 woof
