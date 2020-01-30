@@ -276,16 +276,19 @@ my-favorite-number
 ;; @@
 ;; Problem Set 1: 
 ;; - Write an expression that calculates the number of seconds in a year.
+(* 365 24 60 60)
 ;; - Define diameter to be some number and write expression that calculates the area
 ;;   of a circle with that diameter.
-;; - Write arithmetic expressions for other formulas that you remember from high school
-;;   (or look some up if you don't remember any!).
-
-;; @@
 (def diameter 102.3)
 
 (let [radius (/ diameter 2)]
   (* radius radius Math/PI))
+;; - Write arithmetic expressions for other formulas that you remember from high school
+;;   (or look some up if you don't remember any!).
+
+;; @@
+
+
 
 ;; @@
 woof
