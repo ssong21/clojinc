@@ -3,7 +3,7 @@
 ;; by Lee Spector <lspector@hampshire.edu>, 2011-2017
 ;; Version (date): 20170914
 
-;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop) 
+;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop)
 ;; session, with minimal comments and occasional problem sets. It is intended
 ;; to serve as the starting-point for semi-independent learning of the Clojure
 ;; programming language, for people who have at least some minimal experience
@@ -11,16 +11,16 @@
 ;; getting a Clojure implementation/REPL up and running; consult the online
 ;; resources listed below, or search the web, if you need help with that.
 
-;; The format of this file is alternating Clojure expressions with 
-;; commented-out output (including both the output produced by explicit print  
-;; statements and the values returned by the evaluated expressions). You should 
-;; be able to proceed through the file, evaluating an expression at a time, and   
-;; if you do this you should get the same output (or similar output, in cases 
+;; The format of this file is alternating Clojure expressions with
+;; commented-out output (including both the output produced by explicit print
+;; statements and the values returned by the evaluated expressions). You should
+;; be able to proceed through the file, evaluating an expression at a time, and
+;; if you do this you should get the same output (or similar output, in cases
 ;; that involve nondeterminism). In many cases later expressions rely on having
 ;; evaluated earlier expressions in the file.
 
-;; The material in this file is informal and idiosyncratic in its coverage, 
-;; leaving out many things that other Clojure introductions include and revealing 
+;; The material in this file is informal and idiosyncratic in its coverage,
+;; leaving out many things that other Clojure introductions include and revealing
 ;; the Lisp-oriented bias of the author. The intention is just to lead beginners
 ;; deeply enough into Clojure territory for them to proceed in other directions
 ;; on their own.
@@ -32,14 +32,14 @@
 ;; applications used for examples and problem sets are grammar-driven text
 ;; generation, genetic programming, and simple graphics. We also demonstrate
 ;; alternatives for defining iterative and recursive algorithms and briefly touch
-;; upon topics ranging from debugging and profiling to file I/O and concurrency. 
+;; upon topics ranging from debugging and profiling to file I/O and concurrency.
 
-;; Many things are introduced here without explanation. My suggestion is that 
-;; you observe the output that is provided here, look things up in online resources 
-;; and in documentation that may be available in your Clojure environment, and, 
-;; most crucially, experiment with variations of the expressions presented here. 
-;; The problem sets are prods for further experimentation but it is best to  
-;; experiment continuously. Some of the problems provided here are easy, some are 
+;; Many things are introduced here without explanation. My suggestion is that
+;; you observe the output that is provided here, look things up in online resources
+;; and in documentation that may be available in your Clojure environment, and,
+;; most crucially, experiment with variations of the expressions presented here.
+;; The problem sets are prods for further experimentation but it is best to
+;; experiment continuously. Some of the problems provided here are easy, some are
 ;; quite hard, and many could be completed/varied/extended in several different
 ;; ways.
 
@@ -181,7 +181,7 @@
 
 (sqrt (* 2 2 2 2))
 
-; CompilerException java.lang.RuntimeException: Unable to resolve symbol: sqrt in this context, compiling:(NO_SOURCE_PATH:12) 
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: sqrt in this context, compiling:(NO_SOURCE_PATH:12)
 
 
 
@@ -245,18 +245,39 @@ my-favorite-number
 ; #<JFrame javax.swing.JFrame[frame0,0,22,400x400,invalid,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x378,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
 
 
-;; Problem Set 1: 
+;; Problem Set 1:
 ;; - Write an expression that calculates the number of seconds in a year.
+(* 365 24 60 60)
 ;; - Define diameter to be some number and write expression that calculates the area
 ;;   of a circle with that diameter.
+(def diameter 102.3)
+
+(let [radius (/ diameter 2)]
+  (* radius radius Math/PI))
 ;; - Write arithmetic expressions for other formulas that you remember from high school
 ;;   (or look some up if you don't remember any!).
+;; Area of Triangle
+(def base 10.3)
+(def height 3.6)
+(* 1/2 base height)
+
+;; Volume of a Cylinder
+(def diameter 52.6)
+(def height 10.0)
+(let [radius (/ diameter 2) radius-squared (* radius radius)]
+  (* Math/PI radius-squared height))
+
+;; Surface Area of a Right circular cone
+(def diameter 21.8)
+(def height 45.2)
+(let [radius (/ diameter 2) radius-squared (* radius radius) height-squared (* height height) square-root (Math/sqrt (+ radius-squared height-squared)) interior (+ radius square-root )]
+  (* Math/PI radius interior))
 
 
 
 woof
 
-; CompilerException java.lang.RuntimeException: Unable to resolve symbol: woof in this context, compiling:(NO_SOURCE_PATH:0) 
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: woof in this context, compiling:(NO_SOURCE_PATH:0)
 
 
 
@@ -375,7 +396,7 @@ my-favorite-list
 ;; This returns a vector rather than a list:
 
 (shuffle '(a b c d e f g))
-         
+
 ; [f a g b c d e]
 
 
@@ -468,7 +489,7 @@ some other stuff."
 
 
 
-(cond 
+(cond
   (< x y) (concat (list x) '(is smaller than) (list y))
   (= x y) (concat (list x) '(is equal to) (list y))
   :else (concat (list x) '(is greater than) (list y)))
@@ -509,9 +530,9 @@ some other stuff."
 
 
 ;; Problem Set 3:
-;; - Write functions that calculate, given reasonable numeric inputs, the values 
+;; - Write functions that calculate, given reasonable numeric inputs, the values
 ;;   of the aritmetic/geometric formulae that you provided for Problem Set 1.
-;; - Write a function that takes a list of one-syllable words, a list of 
+;; - Write a function that takes a list of one-syllable words, a list of
 ;;   two-syllable words, and a list of three-syllable words, and returns a haiku
 ;;   constructed from the provided words.
 
@@ -650,10 +671,10 @@ some other stuff."
 
 (let [my-sentence (sentence)
       your-sentence (sentence)]
-  (concat  '(I said that) my-sentence '(and you said that) 
-    your-sentence '(to which I replied that)
-    my-sentence '(and you said finally that) 
-    your-sentence))
+  (concat  '(I said that) my-sentence '(and you said that)
+           your-sentence '(to which I replied that)
+           my-sentence '(and you said finally that)
+           your-sentence))
 
 ; (I said that the steamboat liked a steamboat and you said that a walrus loathed the steamboat to which I replied that the steamboat liked a steamboat and you said finally that a walrus loathed the steamboat)
 
@@ -666,9 +687,9 @@ some other stuff."
   x)
 
 ; 5
-  
-  
-  
+
+
+
 (defn print-sentence
   "Prints a sentence (symbols in a list) followed by a newline."
   [s]
@@ -681,7 +702,7 @@ some other stuff."
 
 (print-sentence (sentence))
 
-; the walrus loathed the columnist 
+; the walrus loathed the columnist
 ; nil
 
 
@@ -690,7 +711,7 @@ some other stuff."
 
 (print-sentence (sentence))
 
-; a contingency caressed the pedestrian 
+; a contingency caressed the pedestrian
 ; nil
 
 
@@ -711,7 +732,7 @@ some other stuff."
 
 ;; this is a set:
 
-#{:tree :mushroom :aardvark} 
+#{:tree :mushroom :aardvark}
 
 ; #{:mushroom :tree :aardvark}
 
@@ -809,7 +830,7 @@ some other stuff."
 
 
 
-(defn member? 
+(defn member?
   "Returns true if item is in lst, false otherwise."
   [item lst]
   (if (some #{item} lst) true false))
@@ -882,7 +903,7 @@ some other stuff."
     (println 'pussycat)
     (print-sentence my-sentence)))
 
-; the contingency liked the steamboat 
+; the contingency liked the steamboat
 ; nil
 
 
@@ -927,11 +948,11 @@ some other stuff."
 
 (dotimes [_ 5] (print-sentence (sentence)))
 
-; a walrus apprehended the pineapple 
-; the pineapple confounded the pedestrian 
-; the pedestrian caressed a pineapple 
-; the contingency liked a walrus 
-; the steamboat acquired the steamboat 
+; a walrus apprehended the pineapple
+; the pineapple confounded the pedestrian
+; the pedestrian caressed a pineapple
+; the contingency liked a walrus
+; the steamboat acquired the steamboat
 ; nil
 
 
@@ -1080,13 +1101,13 @@ some other stuff."
 
 [a b c d]
 
-; CompilerException java.lang.RuntimeException: Unable to resolve symbol: a in this context, compiling:(NO_SOURCE_PATH:0) 
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: a in this context, compiling:(NO_SOURCE_PATH:0)
 
 
 
 ;; this is a keyword, which evaluates to itself:
 
-:hi  
+:hi
 
 ; :hi
 
@@ -1197,7 +1218,7 @@ some other stuff."
   (if (not (seq? nested-list))
     nested-list
     (shuffle (map shuffle-deep nested-list))))
-        
+
 ; #'clojinc.core/shuffle-deep
 
 
@@ -1219,7 +1240,7 @@ some other stuff."
 ;;   and each card is a vector like [7 :spades] or [:king :hearts].
 ;; - Deal five cards to each of two players and determine who has a better poker hand.
 ;;   This is complicated to do completely, but start by defining functions to detect
-;;   pairs, three-of-a-kind, four-of-a-kind, fluses, straights, etc. Then combine them 
+;;   pairs, three-of-a-kind, four-of-a-kind, fluses, straights, etc. Then combine them
 ;;   to define the full function to determine a winner.
 
 
@@ -1248,9 +1269,9 @@ some other stuff."
 
 (defn sandwich
   ([main-ingredient]
-    (concat '(a) (list main-ingredient) '(sandwich with a pickle, please)))
+   (concat '(a) (list main-ingredient) '(sandwich with a pickle, please)))
   ([main-ingredient second-ingredient]
-    (concat '(a) (list main-ingredient) '(and) (list second-ingredient) '(sandwich with a pickle))))
+   (concat '(a) (list main-ingredient) '(and) (list second-ingredient) '(sandwich with a pickle))))
 
 ; #'clojinc.core/sandwich
 
@@ -1271,9 +1292,9 @@ some other stuff."
 (defn assume-cheese
   "calls with one arg use a default of cheese for second"
   ([main-ingredient]
-    (assume-cheese main-ingredient 'cheese))
+   (assume-cheese main-ingredient 'cheese))
   ([main-ingredient second-ingredient]
-    (concat '(a) (list main-ingredient) '(and) (list second-ingredient) '(sandwich with a pickle))))
+   (concat '(a) (list main-ingredient) '(and) (list second-ingredient) '(sandwich with a pickle))))
 
 ; #'clojinc.core/assume-cheese
 
@@ -1293,7 +1314,7 @@ some other stuff."
 
 ;; this is a map:
 
-{:name "Edgar Allen Poe" :born 1809 :birthplace "Boston, MA" :residence "Baltimore, MD"} 
+{:name "Edgar Allen Poe" :born 1809 :birthplace "Boston, MA" :residence "Baltimore, MD"}
 
 ; {:name "Edgar Allen Poe",
 ;  :born 1809,
@@ -1395,7 +1416,7 @@ eddie
 ;; So (-> foo (bar baz) (bingo bonkers)) evaluates foo to produce (let's say) X, then
 ;; evaluates (bar X baz) to produce (let's say) Y, and then (bingo Y bonkers).
 
-(-> 0 
+(-> 0
     (- 10)
     (/ 2)
     (cons '(is the answer)))
@@ -1415,10 +1436,10 @@ eddie
 ;; ->> threads into the last argument position, rather than the first
 
 
-(->> 0 
+(->> 0
      (- 10)
      (/ 2))
-  
+
 ; 1/5
 
 
@@ -1454,7 +1475,7 @@ eddie
                 (if expansion
                   (generate expansion)
                   (list phrase)))))
-                  
+
 ; #'clojinc.core/generate
 
 
@@ -1467,8 +1488,8 @@ eddie
 
 (def grammar
   {:sentence [:noun-phrase :verb-phrase]
-   :noun-phrase #{[:article :adj* :noun :pp*] 
-                  :name 
+   :noun-phrase #{[:article :adj* :noun :pp*]
+                  :name
                   :pronoun}
    :verb-phrase [:verb :noun-phrase :pp*]
    :pp* #{() [:pp :pp*]}
@@ -1512,8 +1533,8 @@ eddie
 
 ;; Problem Set 8:
 ;; - Create a grammar map, in the format presented above, for blues melodies
-;;   or song lyrics or dance step sequences or band names or thesis project titles 
-;;   or business concepts or anything else that interests you. Use generate to 
+;;   or song lyrics or dance step sequences or band names or thesis project titles
+;;   or business concepts or anything else that interests you. Use generate to
 ;;   produce items of your chosen category.
 ;; - Create a database (set) of music CDs (maps) each of which is something like
 ;;   {:title "Jherico Jerk"
@@ -1539,7 +1560,7 @@ eddie
        (count numbers))))
 
 ; #'clojinc.core/average
-  
+
 
 
 (average (range 10))
@@ -1595,16 +1616,16 @@ eddie
 
 
 (eval (list '+ 1 2))
-       
+
 ; 3
 
 
 
-;; Atoms manage global items (single items) that two threads shouldn't 
-;; change at the same time. This is different from global variables in most 
-;; other languages, because one can only change an atom through special access 
-;; functions that interact with a "software transactional memory." This ensures 
-;; that each change is completed before any other starts (that is, changes are 
+;; Atoms manage global items (single items) that two threads shouldn't
+;; change at the same time. This is different from global variables in most
+;; other languages, because one can only change an atom through special access
+;; functions that interact with a "software transactional memory." This ensures
+;; that each change is completed before any other starts (that is, changes are
 ;; "atomic"). If you try to change an atom and it is busy then your change
 ;; will be retried. So the code that you use to change it should not have side
 ;; effects. Atoms are created with atom and altered  with swap!, reset!,
@@ -1657,14 +1678,14 @@ X
 
 
 ;; Problem Set 9:
-;; - Write a division function that returns 0 (instead of producing an error) 
+;; - Write a division function that returns 0 (instead of producing an error)
 ;;   if it is called with a second argument of zero.
-;; - Write a function that produces, prints, and then evaluates a random 
-;;   arithmetic expression using basic math functions, numbers, and @X (to 
+;; - Write a function that produces, prints, and then evaluates a random
+;;   arithmetic expression using basic math functions, numbers, and @X (to
 ;;   get the value of an atom X).
-;; - Define "data" to be a vector of [x y] data points to represent a data set 
+;; - Define "data" to be a vector of [x y] data points to represent a data set
 ;;   of your choosing.
-;; - Write a function that takes an expression and evaluates it repeatedly, with 
+;; - Write a function that takes an expression and evaluates it repeatedly, with
 ;;   atom X set to each x value in the data, and returns the "error" of the
 ;;   results in comparison to all of the corresponding y values. For each
 ;;   [x y] pair the error for that pair is the square of the difference
@@ -1672,14 +1693,14 @@ X
 ;;   x. The overall error is the sum of the errors for all of the data pairs.
 ;; - Print the errors of randomly generated expressions.
 ;; - Write a "select" function that takes a population (a vector of expressions)
-;;   and returns an expression from the population. Your function should have the  
-;;   property that lower-error expressions are more likely to be returned than 
+;;   and returns an expression from the population. Your function should have the
+;;   property that lower-error expressions are more likely to be returned than
 ;;   higher-error expressions.
 
 
 
 (defn count-fns
-  "Returns the number of functions (items in function position) in a symbolic 
+  "Returns the number of functions (items in function position) in a symbolic
    expression."
   [expression]
   (if (list? expression)
@@ -1714,12 +1735,12 @@ X
 
 
 
-;; This "buckets-needed" function will seem bizarre at first, but it's 
+;; This "buckets-needed" function will seem bizarre at first, but it's
 ;; handy for some other functions that follow.
 
 (defn buckets-needed
   "Takes a sequence of buckets, each of which is a non-negative integer
-   representing the capacity of a bucket, and returns the number of buckets 
+   representing the capacity of a bucket, and returns the number of buckets
    that one must use, starting with the first bucket and adding them
    sequentially, to hold the provided number of items. Assumes that buckets
    with sufficient capacity are provided."
@@ -1805,7 +1826,7 @@ X
 
 (defn replace-fn
   "Returns a copy of the provided expression with new-fn used in place of whatever
-   was originally in the function position at the provided index. Assumes index is 
+   was originally in the function position at the provided index. Assumes index is
    valid."
   [expression index new-fn]
   (if (zero? index)
@@ -1814,10 +1835,10 @@ X
           arg-index (buckets-needed buckets index)]
       (apply list
              (assoc (into [] expression)
-                    arg-index
-                    (replace-fn (nth expression arg-index)
-                                (dec (- index (reduce + (take (dec arg-index) buckets))))
-                                new-fn))))))
+               arg-index
+               (replace-fn (nth expression arg-index)
+                           (dec (- index (reduce + (take (dec arg-index) buckets))))
+                           new-fn))))))
 
 ; #'clojinc.core/replace-fn
 
@@ -1876,8 +1897,8 @@ X
 
 
 (defn replace-subexpression
-  "Returns a copy of the provided expression with new-subexpression used in place 
-   of whatever subexpression was originally in the position at the provided index. 
+  "Returns a copy of the provided expression with new-subexpression used in place
+   of whatever subexpression was originally in the position at the provided index.
    Assumes index is valid."
   [expression index new-subexpression]
   (if (zero? index)
@@ -1886,10 +1907,10 @@ X
           arg-index (buckets-needed buckets index)]
       (apply list
              (assoc (into [] expression)
-                    arg-index
-                    (replace-subexpression (nth expression arg-index)
-                                           (dec (- index (reduce + (take (dec arg-index) buckets))))
-                                           new-subexpression))))))
+               arg-index
+               (replace-subexpression (nth expression arg-index)
+                                      (dec (- index (reduce + (take (dec arg-index) buckets))))
+                                      new-subexpression))))))
 
 ; #'clojinc.core/replace-subexpression
 
@@ -1922,13 +1943,13 @@ X
 ;; - Write a "mutate" function that takes an expression and returns a new expression
 ;;   in which one sub-expression has been replaced by a new, random sub-expression.
 ;; - Write a "crossover" function that takes two expressions and returns a new
-;;   expression that is like the first except that one sub-expression has been 
+;;   expression that is like the first except that one sub-expression has been
 ;;   replaced by a sub-expression of the second.
 ;; - Using select, mutate, and crossover, write a genetic programming system that
 ;;   evolves an expression with low error for a vector of [x y] pairs.
 ;; - If your genetic programming system evaluates expressions containing @X then
 ;;   it will not be possible to evaluate multiple expressions simultaneously
-;;   using multiple threads on a multicore machine, because the different 
+;;   using multiple threads on a multicore machine, because the different
 ;;   evaluations will fight over the value of X. Change the way that you get
 ;;   x values into the expressions that you evaluate in order to fix this.
 
@@ -1993,10 +2014,10 @@ X
 ;; this uses a destructuring binding form:
 
 (defn print-twins
-  [[this that]] 
-  (println "the first twin is" 
+  [[this that]]
+  (println "the first twin is"
            (name this)
-           "and the other is" 
+           "and the other is"
            (name that)))
 
 ; #'clojinc.core/print-twins
@@ -2015,10 +2036,10 @@ X
 
 
 
-(defn increment-unluckily 
+(defn increment-unluckily
   [nums]
   (map add13 nums))
-    
+
 ; #'clojinc.core/increment-unluckily
 
 
@@ -2030,7 +2051,7 @@ X
 
 
 (increment-unluckily '(1 2 3 4 Quagmire))
-    
+
 ; (14 15 16 ClassCastException clojure.lang.Symbol cannot be cast to java.lang.Number  clojure.lang.Numbers.add (Numbers.java:126)
 
 
@@ -2121,7 +2142,7 @@ X
 ;; lots of Java interop here
 
 (defn render-shape [g [shape-name x y h w color]]
-  (.setColor g color) 
+  (.setColor g color)
   (case shape-name
     rect (.fillRect g x y h w)
     oval (.fillOval g x y h w)))
@@ -2132,11 +2153,11 @@ X
 
 ;; and even more fancy Java stuff here
 
-(def panel 
+(def panel
   (let [jp (proxy [javax.swing.JPanel]
-             []
+                  []
              (getPreferredSize [] (java.awt.Dimension. max-x max-y))
-             (paint [g] 
+             (paint [g]
                (render-shape g (list 'rect 0 0 max-x max-y java.awt.Color/WHITE))
                (doall (map #(render-shape g %) @shapes))))]
     (doto (new javax.swing.JFrame "My graphics window")
@@ -2160,17 +2181,17 @@ X
 
 ;; Whew. Quite a bit less simple than I would have liked! And not ideal for
 ;; serious use, for several reasons. But now we have a way to make simple
-;; drawings. 
+;; drawings.
 
 
 
 ;; test it out by drawing a bunch of random shapes:
 
-(dotimes [_ 20] 
+(dotimes [_ 20]
   (draw-shape (rand-nth '(rect oval))
-    (rand-int 400) (rand-int 200) (rand-int 400) (rand-int 400)
-    (new java.awt.Color 
-      (rand-int 256) (rand-int 256) (rand-int 256) (rand-int 256))))
+              (rand-int 400) (rand-int 200) (rand-int 400) (rand-int 400)
+              (new java.awt.Color
+                   (rand-int 256) (rand-int 256) (rand-int 256) (rand-int 256))))
 
 ; < shapes appear in the window >
 ; nil
@@ -2193,7 +2214,7 @@ X
 ;; Here is an iterative version of a factorial function.
 ;; We start with a counter i with value 1 and a result that is
 ;; initially 1. We loop adding 1 to i each time, and multiplying
-;; the result by i each time, until i is greater than n. You 
+;; the result by i each time, until i is greater than n. You
 ;; can read the call to "recur" as something like "go back to the
 ;; top of the loop but use (inc i) -- which is the current value
 ;; of i plus 1 -- as the next i and use (* result i) -- which is
@@ -2250,10 +2271,10 @@ X
 ;; lisps will) each recursive call will consume additional memory and
 ;; this will run out of memory for very large values of n.
 
-(defn factorial 
+(defn factorial
   [n]
   (if (< n 2)
-    1 
+    1
     (* n (factorial (dec n)))))
 
 ; #'clojinc.core/factorial
@@ -2263,16 +2284,16 @@ X
 ;; Here is a recursive version that uses recur for the recursive step
 ;; in order to avoid the potential memory problems for large inputs.
 ;; The first implementation allows the user to call the function normally,
-;; with just the input, but the second implementation takes a second 
+;; with just the input, but the second implementation takes a second
 ;; argument into which the answer is accumulated.
 
 (defn factorial
   ([n]
-    (factorial n 1))
+   (factorial n 1))
   ([n accumulator]
-    (if (< n 2)
-      accumulator
-      (recur (dec n) (* n accumulator)))))
+   (if (< n 2)
+     accumulator
+     (recur (dec n) (* n accumulator)))))
 
 ; #'clojinc.core/factorial
 
@@ -2311,7 +2332,7 @@ X
 
 
 ;; Note that "apply" in the last two examples could be replaced by "reduce".
-;; With "apply" each of these makes a single call to "*", with all of the 
+;; With "apply" each of these makes a single call to "*", with all of the
 ;; arguments at once. Using "reduce" would do the same job by calling "*"
 ;; first on the first two numbers, then again on the result of that first
 ;; multiplication and the third number, etc. Both "apply" and "reduce" are
@@ -2323,11 +2344,11 @@ X
 ;; We create an infinite lazy sequence of pairs [i i!] (that is, a number
 ;; and its factorial). We do this by calling iterate, telling it to start
 ;; with [1 1], and telling it to get the next pair from the current pair by
-;; making the first number one higher and the second number the result of 
+;; making the first number one higher and the second number the result of
 ;; multiplying the current second number by the new first number.
 
-(def all-factorials (iterate 
-                      (fn [[i fact]] [(inc i) (* fact (inc i))]) 
+(def all-factorials (iterate
+                      (fn [[i fact]] [(inc i) (* fact (inc i))])
                       [1 1]))
 
 ; #'clojinc.core/all-factorials
@@ -2335,12 +2356,12 @@ X
 
 
 ;; We can pull out the right pair for the input n using nth. Since we only want
-;; the factorial, not the pair, we call second to return just the factorial. 
+;; the factorial, not the pair, we call second to return just the factorial.
 ;; What is the right index to pass to nth? The sequence looks like
 ;; this: ([1 1] [2 2] [3 6] [4 24] [5 120] [6 720] ...)
 ;; Since nth is zero-based we want to look at index 0 for the factorial
 ;; of 1, index 1 for the factorial of 2, etc., which means we want
-;; to look at index (dec n). 
+;; to look at index (dec n).
 
 (defn factorial
   [n]
@@ -2357,9 +2378,9 @@ X
 
 
 ;; Another way to pull out the right pair is to search all-factorials
-;; for a pair with a first number equal to n. 
+;; for a pair with a first number equal to n.
 
-(defn factorial 
+(defn factorial
   [n]
   (second (first (filter  #(= (first %) n) all-factorials))))
 
@@ -2382,7 +2403,7 @@ X
 
 
 ;; Problem Set 12:
-;; - Write Clojure functions for several of the recursive functions that are 
+;; - Write Clojure functions for several of the recursive functions that are
 ;;   listed at http://en.wikipedia.org/wiki/Recursion_(computer_science)
 ;;   other than factorial. Try to write versions in several of the styles
 ;;   that were presented above for factorial.
@@ -2391,7 +2412,7 @@ X
 
 (defn print-comparison
   [x y]
-  (cond 
+  (cond
     (< x y) (concat (list x) '(is smaller than) (list y))
     (= x y) (concat (list x) '(is equal to) (list y))
     :else (concat (list x) '(is greater than) (list y))))
@@ -2418,14 +2439,14 @@ X
 
 
 
-;; Note that cond couldn't be written as a function, because we don't want 
+;; Note that cond couldn't be written as a function, because we don't want
 ;; it to evaluate everything that is passed to it, just the thing corresponding
 ;; to the matching condition. So cond is actually implemented as a macro, which
 ;; defines an expression that evaluates to another expression which is then
 ;; evaluated.
 
 (macroexpand
-  '(cond 
+  '(cond
      (< x y) (concat (list x) '(is smaller than) (list y))
      (= x y) (concat (list x) '(is equal to) (list y))
      :else (concat (list x) '(is greater than) (list y))))
@@ -2446,7 +2467,7 @@ X
 
 (defmacro arithmetic-if
   [x y eval-if-x-less eval-if-equal eval-if-x-greater]
-  `(cond 
+  `(cond
      (< ~x ~y) ~eval-if-x-less
      (= ~x ~y) ~eval-if-equal
      :else ~eval-if-x-greater))
@@ -2459,10 +2480,10 @@ X
 
 (defn print-comparison
   [x y]
-  (arithmetic-if x y 
-     (concat (list x) '(is smaller than) (list y))
-     (concat (list x) '(is equal to) (list y))
-     (concat (list x) '(is greater than) (list y))))
+  (arithmetic-if x y
+                 (concat (list x) '(is smaller than) (list y))
+                 (concat (list x) '(is equal to) (list y))
+                 (concat (list x) '(is greater than) (list y))))
 
 ; #'clojinc.core/print-comparison
 
@@ -2499,11 +2520,11 @@ X
 
 ;; The fact that this is a macro, and not a function, is
 ;; made clear by providing expressions that have side-effects
-;; (like printing) for the "eval-if-..." clauses, and seeing 
+;; (like printing) for the "eval-if-..." clauses, and seeing
 ;; that only the matching clause is executed:
 
-(arithmetic-if 1 
-               2 
+(arithmetic-if 1
+               2
                (println :less)
                (println :equal)
                (println :greater))
@@ -2561,9 +2582,9 @@ teens
 
 
 (until (> (rand) 0.9)
-  (println "he he")
-  (println "      ha!"))
- 
+       (println "he he")
+       (println "      ha!"))
+
 ; he he
 ;       ha!
 ; he he
@@ -2581,8 +2602,8 @@ teens
 
 
 (until (> @counter 4)
-  (println "the counter is now " @counter)
-  (swap! counter inc))
+       (println "the counter is now " @counter)
+       (swap! counter inc))
 
 ; the counter is now  0
 ; the counter is now  1
@@ -2627,7 +2648,7 @@ teens
 
 
 ;; Reading in a text file is easy if you have a full path:
- 
+
 (slurp "/Users/leespector/Code/clojure/clojinc/Jabberwocky.txt")
 
 ; "JABBERWOCKY by Lewis Carroll\n(from Through the Looking-Glass and What Alice Found There, 1872) \n\n\n`Twas brillig, and the slithy toves\n  Did gyre and gimble in the wabe:\nAll mimsy were the borogoves,\n  And the mome raths outgrabe.\n\n\n\"Beware the Jabberwock, my son!\n  The jaws that bite, the claws that catch!\nBeware the Jubjub bird, and shun\n  The frumious Bandersnatch!\"\n\nHe took his vorpal sword in hand:\n  Long time the manxome foe he sought --\nSo rested he by the Tumtum tree,\n  And stood awhile in thought.\n\nAnd, as in uffish thought he stood,\n  The Jabberwock, with eyes of flame,\nCame whiffling through the tulgey wood,\n  And burbled as it came!\n\nOne, two! One, two! And through and through\n  The vorpal blade went snicker-snack!\nHe left it dead, and with its head\n  He went galumphing back.\n\n\"And, has thou slain the Jabberwock?\n  Come to my arms, my beamish boy!\nO frabjous day! Callooh! Callay!'\n  He chortled in his joy.\n\n\n`Twas brillig, and the slithy toves\n  Did gyre and gimble in the wabe;\nAll mimsy were the borogoves,\n  And the mome raths outgrabe. "
@@ -2639,7 +2660,7 @@ teens
 ; nil
 
 
- 
+
 (string/split-lines (slurp "/Users/leespector/Code/clojure/clojinc/Jabberwocky.txt"))
 
 ; ["JABBERWOCKY by Lewis Carroll" "(from Through the Looking-Glass and What Alice Found There, 1872) " "" "" "`Twas brillig, and the slithy toves" "  Did gyre and gimble in the wabe:" "All mimsy were the borogoves," "  And the mome raths outgrabe." "" "" "\"Beware the Jabberwock, my son!" "  The jaws that bite, the claws that catch!" "Beware the Jubjub bird, and shun" "  The frumious Bandersnatch!\"" "" "He took his vorpal sword in hand:" "  Long time the manxome foe he sought --" "So rested he by the Tumtum tree," "  And stood awhile in thought." "" "And, as in uffish thought he stood," "  The Jabberwock, with eyes of flame," "Came whiffling through the tulgey wood," "  And burbled as it came!" "" "One, two! One, two! And through and through" "  The vorpal blade went snicker-snack!" "He left it dead, and with its head" "  He went galumphing back." "" "\"And, has thou slain the Jabberwock?" "  Come to my arms, my beamish boy!" "O frabjous day! Callooh! Callay!'" "  He chortled in his joy." "" "" "`Twas brillig, and the slithy toves" "  Did gyre and gimble in the wabe;" "All mimsy were the borogoves," "  And the mome raths outgrabe. "]
@@ -2660,16 +2681,16 @@ teens
 
 
 
-(doseq [line (shuffle (string/split-lines 
+(doseq [line (shuffle (string/split-lines
                         (slurp "/Users/leespector/Code/clojure/clojinc/Jabberwocky.txt")))]
   (println line))
 
 ;   And the mome raths outgrabe.
-; 
+;
 ; "Beware the Jabberwock, my son!
 ;   The Jabberwock, with eyes of flame,
 ;   He went galumphing back.
-; 
+;
 ; Beware the Jubjub bird, and shun
 ;   And stood awhile in thought.
 ;   The frumious Bandersnatch!"
@@ -2680,7 +2701,7 @@ teens
 ;   Long time the manxome foe he sought --
 ; All mimsy were the borogoves,
 ;   The jaws that bite, the claws that catch!
-;   And the mome raths outgrabe. 
+;   And the mome raths outgrabe.
 ;   Come to my arms, my beamish boy!
 ; One, two! One, two! And through and through
 ; Came whiffling through the tulgey wood,
@@ -2688,17 +2709,17 @@ teens
 ; "And, has thou slain the Jabberwock?
 ; O frabjous day! Callooh! Callay!'
 ; So rested he by the Tumtum tree,
-; 
+;
 ;   And burbled as it came!
-; 
-; 
+;
+;
 ;   Did gyre and gimble in the wabe:
 ; He left it dead, and with its head
-; 
-; (from Through the Looking-Glass and What Alice Found There, 1872) 
-; 
-; 
-; 
+;
+; (from Through the Looking-Glass and What Alice Found There, 1872)
+;
+;
+;
 ; And, as in uffish thought he stood,
 ; `Twas brillig, and the slithy toves
 ; JABBERWOCKY by Lewis Carroll
@@ -2713,8 +2734,8 @@ teens
 
 
 
-;; If you want to refer to files in a project-relative way then the the details will 
-;; depend on the way that you run your code. Here I use a utility by Arthur Edelstein 
+;; If you want to refer to files in a project-relative way then the the details will
+;; depend on the way that you run your code. Here I use a utility by Arthur Edelstein
 ;; (the author of clooj). I added [local-file "0.0.4"] to the dependencies in project.clj,
 ;; then ran "lein deps" from a command line in the project's directory (which requires
 ;; leiningen from https://github.com/technomancy/leiningen), and quit/restarted clooj.
@@ -2743,5 +2764,5 @@ teens
 ;; - Write a function that executes all of the expressions in this file and prints out the
 ;;   expression that returns the result containing the most characters.
 
-;; That's it! Now you should be ready to do more interesting things of your own design in 
+;; That's it! Now you should be ready to do more interesting things of your own design in
 ;; Clojure.
