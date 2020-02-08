@@ -161,7 +161,7 @@
 
 
 
-(/ 23 0) ;; nope
+(/ 23 0)                                                    ;; nope
 
 ; ArithmeticException Divide by zero  clojure.lang.Numbers.divide (Numbers.java:156)
 
@@ -185,13 +185,13 @@
 
 
 
-(Math/sqrt (* 2 2 2 2))  ;; from java.lang.Math
+(Math/sqrt (* 2 2 2 2))                                     ;; from java.lang.Math
 
 ; 4.0
 
 
 
-(Math/sqrt -4) ;; nope
+(Math/sqrt -4)                                              ;; nope
 
 ; NaN
 
@@ -209,7 +209,7 @@
 
 
 
-Math/PI  ;; this is a java interop form, for the PI static field of the Math class
+Math/PI                                                     ;; this is a java interop form, for the PI static field of the Math class
 
 ; 3.141592653589793
 
@@ -261,16 +261,16 @@ my-favorite-number
 (def height 3.6)
 (* 1/2 base height)
 
-;; Volume of a Cylinder
+;; Volume of a Cylinder (ex: 21730.08)
 (def diameter 52.6)
 (def height 10.0)
 (let [radius (/ diameter 2) radius-squared (* radius radius)]
   (* Math/PI radius-squared height))
 
-;; Surface Area of a Right circular cone
+;; Surface Area of a Right circular cone (ex: 1965.4)
 (def diameter 21.8)
 (def height 45.2)
-(let [radius (/ diameter 2) radius-squared (* radius radius) height-squared (* height height) square-root (Math/sqrt (+ radius-squared height-squared)) interior (+ radius square-root )]
+(let [radius (/ diameter 2) radius-squared (* radius radius) height-squared (* height height) square-root (Math/sqrt (+ radius-squared height-squared)) interior (+ radius square-root)]
   (* Math/PI radius interior))
 
 
@@ -363,7 +363,7 @@ my-favorite-list
 
 
 
-(third '(a b c d e)) ;; nope
+(third '(a b c d e))                                        ;; nope
 
 ; #<CompilerException java.lang.Exception: Unable to resolve symbol: third in this context (NO_SOURCE_FILE:51)>
 
@@ -414,10 +414,21 @@ my-favorite-list
 
 ;; Problem Set 2:
 ;; - Create a complicated nested list using only cons, quoted symbols, and ().
+(def stuffed-list (cons 'apples (cons 'bloob (cons 'blarb (cons 'toof '(bowwow shwwow))))))
 ;; - Pull out various parts of your list with nested calls to nth.
+(nth stuffed-list 0)
+(nth stuffed-list 1)
+(nth stuffed-list 2)
+(nth stuffed-list 3)
+(nth stuffed-list 4)
+(nth stuffed-list 5)
 ;; - Pull out random parts of your list with nested calls to rand-nth.
+(rand-nth stuffed-list)
 ;; - Write an expression that produces a semi-random haiku.
 
+(do (def one-syllable (cons 'life (cons 'love (cons 'world (cons 'day '(face heart)))))) (println (concat [(rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable)]))
+    (println (concat [(rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable)]))
+    (println (concat [(rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable) (rand-nth one-syllable)])))
 
 
 (defn my-function
@@ -513,7 +524,7 @@ some other stuff."
 
 
 
-(use 'clojure.repl) ;; need to do this to have access to the "doc" function below
+(use 'clojure.repl)                                         ;; need to do this to have access to the "doc" function below
 
 ; nil
 
@@ -532,9 +543,34 @@ some other stuff."
 ;; Problem Set 3:
 ;; - Write functions that calculate, given reasonable numeric inputs, the values
 ;;   of the aritmetic/geometric formulae that you provided for Problem Set 1.
+(defn area-triangle
+  "Calculates the Area of a Triangle"
+  [base height]
+  (* 1/2 base height))
+
+(area-triangle 10.3 3.6)                                    ;; 18.54
+
+(defn volume-cylinder
+  "Calculates the Volume of a Cylinder"
+  [diameter height]
+  (let [radius (/ diameter 2) radius-squared (* radius radius)]
+    (* Math/PI radius-squared height)))
+
+(volume-cylinder 52.6 10.0)                                 ;; 21730.08
+
+(defn surface-area-right-cone
+  "Calculates the Surface Area of a Right Circular Cones"
+  [diameter height]
+  (let [radius (/ diameter 2) radius-squared (* radius radius) height-squared (* height height) square-root (Math/sqrt (+ radius-squared height-squared)) interior (+ radius square-root)]
+    (* Math/PI radius interior)))
+
+(surface-area-right-cone 21.8 45.2)                         ;; 1965.42
+
 ;; - Write a function that takes a list of one-syllable words, a list of
 ;;   two-syllable words, and a list of three-syllable words, and returns a haiku
 ;;   constructed from the provided words.
+
+;; TO DO LATER
 
 
 
@@ -671,10 +707,10 @@ some other stuff."
 
 (let [my-sentence (sentence)
       your-sentence (sentence)]
-  (concat  '(I said that) my-sentence '(and you said that)
-           your-sentence '(to which I replied that)
-           my-sentence '(and you said finally that)
-           your-sentence))
+  (concat '(I said that) my-sentence '(and you said that)
+          your-sentence '(to which I replied that)
+          my-sentence '(and you said finally that)
+          your-sentence))
 
 ; (I said that the steamboat liked a steamboat and you said that a walrus loathed the steamboat to which I replied that the steamboat liked a steamboat and you said finally that a walrus loathed the steamboat)
 
@@ -1028,7 +1064,7 @@ some other stuff."
 
 (defn slowmult
   [n m]
-  (dotimes [i 1000000] (/ i 23))  ;; just wasting time here
+  (dotimes [i 1000000] (/ i 23))                            ;; just wasting time here
   (* n m))
 
 ; #'clojinc.core/slowmult
@@ -1075,7 +1111,7 @@ some other stuff."
 
 
 
-[1 2 3 4]  ;; that's a vector
+[1 2 3 4]                                                   ;; that's a vector
 
 ; [1 2 3 4]
 
@@ -1145,7 +1181,7 @@ some other stuff."
 
 
 
-(into () [:biff :bam :blotto :blink :blorg]) ;; ends up reversed
+(into () [:biff :bam :blotto :blink :blorg])                ;; ends up reversed
 
 ; (:blorg :blink :blotto :bam :biff)
 
@@ -1325,7 +1361,7 @@ some other stuff."
 
 ;; commas are whitespace:
 
-(+ , 2 ,,,,, ,,,,, 3)
+(+, 2,,,,,,,,,, 3)
 
 ; 5
 
@@ -1455,12 +1491,12 @@ eddie
 
 
 (def grammar
-  {:sentence [:noun-phrase :verb-phrase]
+  {:sentence    [:noun-phrase :verb-phrase]
    :noun-phrase [:article :noun]
    :verb-phrase [:verb :noun-phrase]
-   :article #{'the 'a}
-   :noun #{'walrus 'steamboat 'pedestrian 'columnist 'pineapple 'contingency}
-   :verb #{'acquired 'apprehended 'loved 'liked 'loathed 'caressed 'confounded}})
+   :article     #{'the 'a}
+   :noun        #{'walrus 'steamboat 'pedestrian 'columnist 'pineapple 'contingency}
+   :verb        #{'acquired 'apprehended 'loved 'liked 'loathed 'caressed 'confounded}})
 
 ; #'clojinc.core/grammar
 
@@ -1487,21 +1523,21 @@ eddie
 
 
 (def grammar
-  {:sentence [:noun-phrase :verb-phrase]
+  {:sentence    [:noun-phrase :verb-phrase]
    :noun-phrase #{[:article :adj* :noun :pp*]
                   :name
                   :pronoun}
    :verb-phrase [:verb :noun-phrase :pp*]
-   :pp* #{() [:pp :pp*]}
-   :adj* #{() [:adj :adj*]}
-   :pp [:prep :noun-phrase]
-   :prep #{'to 'in 'by 'with 'on}
-   :adj #{'big 'little 'blue 'green 'awesome}
-   :article #{'the 'a}
-   :name #{'gerald 'penelope 'gertrude 'thor}
-   :noun #{'walrus 'steamboat 'pedestrian 'columnist 'pineapple 'contingency}
-   :verb #{'acquired 'apprehended 'loved 'liked 'loathed 'caressed 'confounded}
-   :pronoun #{'he 'she 'it 'these 'those 'that}})
+   :pp*         #{() [:pp :pp*]}
+   :adj*        #{() [:adj :adj*]}
+   :pp          [:prep :noun-phrase]
+   :prep        #{'to 'in 'by 'with 'on}
+   :adj         #{'big 'little 'blue 'green 'awesome}
+   :article     #{'the 'a}
+   :name        #{'gerald 'penelope 'gertrude 'thor}
+   :noun        #{'walrus 'steamboat 'pedestrian 'columnist 'pineapple 'contingency}
+   :verb        #{'acquired 'apprehended 'loved 'liked 'loathed 'caressed 'confounded}
+   :pronoun     #{'he 'she 'it 'these 'those 'that}})
 
 ; #'clojinc.core/grammar
 
@@ -2089,7 +2125,7 @@ X
 ;	at java.lang.Thread.run(Thread.java:680)
 
 
-(System/getProperty "user.name")  ;; a call to a static method of the System class
+(System/getProperty "user.name")                            ;; a call to a static method of the System class
 
 ; "leespector"
 
@@ -2101,7 +2137,7 @@ X
 
 
 
-(.startsWith "Antarctica" "Ant")  ;; calling an instance member
+(.startsWith "Antarctica" "Ant")                            ;; calling an instance member
 
 ; true
 
@@ -2113,7 +2149,7 @@ X
 
 
 
-(.. System (getProperties) (get "user.name"))  ;; an alternative syntax
+(.. System (getProperties) (get "user.name"))               ;; an alternative syntax
 
 ; "leespector"
 
@@ -2382,7 +2418,7 @@ X
 
 (defn factorial
   [n]
-  (second (first (filter  #(= (first %) n) all-factorials))))
+  (second (first (filter #(= (first %) n) all-factorials))))
 
 ; #'clojinc.core/factorial
 

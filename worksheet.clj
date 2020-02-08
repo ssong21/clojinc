@@ -256,6 +256,7 @@ my-favorite-number
   (* radius radius Math/PI))
 ;; - Write arithmetic expressions for other formulas that you remember from high school
 ;;   (or look some up if you don't remember any!).
+
 ;; Area of Triangle
 (def base 10.3)
 (def height 3.6)
@@ -267,7 +268,7 @@ my-favorite-number
 (let [radius (/ diameter 2) radius-squared (* radius radius)]
   (* Math/PI radius-squared height))
 
-;; Surface Area of a Right circular cone
+;; Surface Area of a Right Circular Cone
 (def diameter 21.8)
 (def height 45.2)
 (let [radius (/ diameter 2) radius-squared (* radius radius) height-squared (* height height) square-root (Math/sqrt (+ radius-squared height-squared)) interior (+ radius square-root )]
